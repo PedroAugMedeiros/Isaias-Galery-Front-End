@@ -9,14 +9,14 @@ export const AuthProvider = ({ children }) => {
   const token = Math.random().toString(36).substring(2);
 
   const  getUsers = async () => {
-    Axios.get("http://localhost:9000/getUsers").then((response) => {
+    Axios.get("https://isaias-galery-back-end.onrender.com/getUsers").then((response) => {
           setUsers(response.data);
         });
   }
 
   const getUser = (email) => {
     
-    Axios.get(`http://localhost:9000/getUser/${email}`).then((response) =>setLogedUser(response.data));
+    Axios.get(`https://isaias-galery-back-end.onrender.com/getUser/${email}`).then((response) =>setLogedUser(response.data));
   }
 
   const signin = (email, password) => {
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     if (hasUser?.length) {
       return "Já tem uma conta com esse E-mail";
     } else {
-      Axios.post("http://localhost:9000/register", {
+      Axios.post("https://isaias-galery-back-end.onrender.com/register", {
         name: name,
         email: email, 
         password: password, 
