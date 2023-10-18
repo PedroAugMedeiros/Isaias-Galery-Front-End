@@ -2,23 +2,23 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import * as C from "./styles";
-import Axios from "axios";
+// import Axios from "axios";
 import UploadImage from "../../components/UploadImage";
 import Button from "../../components/Button";
 
 const Home = () => {
   const { signout } = useAuth();
   const navigate = useNavigate();
-  const [user, setUser] = useState();
+  // const [, setUser] = useState();
   const [isAdmin, setIsAdmin] = useState(false);
 
   const { logedUser } = useAuth();
 
-  const getLogedUser = (email) => {
-    Axios.get(`http://localhost:9000/getUser/${email}`,).then((response) => {
-        setUser(response.data);
-    });
-}
+//   const getLogedUser = (email) => {
+//     Axios.get(`http://localhost:9000/getUser/${email}`,).then((response) => {
+//         setUser(response.data);
+//     });
+// }
 
 const nameTrated = logedUser.name.split(' ')[0]
 
