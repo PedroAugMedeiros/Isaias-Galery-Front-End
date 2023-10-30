@@ -8,15 +8,18 @@ export const AuthProvider = ({ children }) => {
   const [users, setUsers] = useState();
   const token = Math.random().toString(36).substring(2);
 
+  const DEVLINK = "http://localhost:9000";
+  const productionlink = 'https://isaias-galery-back-end.onrender.com'; 
+
   const  getUsers = async () => {
-    Axios.get("https://isaias-galery-back-end.onrender.com/getUsers").then((response) => {
+    Axios.get(`${DEVLINK}/getUsers`).then((response) => {
           setUsers(response.data);
         });
   }
 
   const getUser = (email) => {
     
-    Axios.get(`https://isaias-galery-back-end.onrender.com/getUser/${email}`).then((response) =>setLogedUser(response.data));
+    Axios.get(`${DEVLINK}/getUser/${email}`).then((response) =>setLogedUser(response.data));
   }
 
   const signin = (email, password) => {
