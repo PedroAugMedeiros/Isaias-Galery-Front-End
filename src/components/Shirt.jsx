@@ -1,31 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import api from '../config/configApi'
+import { productionlink } from "../config/configApi";
 
 export default function Shirt(props) {
-    const [image, setImage] = useState()
+    const [imageUrl, setImageUrl] = useState()
     const imageName = props.shirtName
-    console.log(imageName)
-    // const {src} = useImage({
-    //     srcList: `${api}/files/users/${imageName}`,
-    //   })
-    const downloadImage = () => {
-        console.log()
-        api.get('/files/users/BG.jpg').then((response) => {
-            console.log(response.prewiew)
-            const file = new Blob([response.data], {type: 'image/jpg'})
-            console.log(file);
-            setImage(file)
-          });
-      };
 
-      console.log(image)
-    
       useEffect(() => {
-        downloadImage();
+       setImageUrl(`${productionlink}/images/${imageName}`)
       },[])
   return (
-    <div className='w-[60%]'>
-        <img className='w-[100%] w-96' src={image}/>
+    <div className='flex flex-col flex-wrap w-[42%] bg-primary-color text-center m-2 rounded-md'>
+        <img className='w-[100%] h-[70%] rounded-t-md' src={imageUrl}/>
+        <div className='flex flex-col gap-2 p-2'>
+        <h1 className='text-[#a855f7]'>{imageName.split('.')[0]}</h1>
+        <button className='text-[white] bg-secondary-color w-[80%] self-center rounded-md outline-none mb-1'>COMPRAR</button>
+        </div>
+       
         </div>
   )
 }

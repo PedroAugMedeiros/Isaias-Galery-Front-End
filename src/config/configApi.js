@@ -5,3 +5,5 @@ const productionlink = 'https://isaias-galery-back-end.onrender.com';
 export default axios.create({
     baseURL: testLink
 });
+
+export { productionlink, testLink }

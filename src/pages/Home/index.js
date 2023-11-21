@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import * as C from "./styles";
 import api from '../../config/configApi'
 import UploadImage from "../../components/UploadImage";
 import Button from "../../components/Button";
 import BG from '../../imageData/BG.jpg';
 import Shirt from "../../components/Shirt";
+import Explore from "../Explore";
+import { getAll } from "../../components/GetImages";
 
 const Home = () => {
   const { signout } = useAuth();
@@ -21,17 +22,21 @@ const Home = () => {
 
 
   const getAllClothings = () => {
-    api.get('/getImages').then((response) => {
-        setAllClothings([])
-        setAllClothings(response.data);
-    });
+    getAll();
 }
 
 const nameTrated = logedUser.name.split(' ')[0]
 
-const renderClothings = () => {
-let imageName;
+const renderHome = (admin) => {
+const render = admin ? <UploadImage />  : <>
+Bem vindo {nameTrated}
+<Explore allClothings={allClothings}/>
+</>
+{/* <Button Text="Sair" onClick={() => [signout(), navigate("/")]}>
+Sair
+</Button></> */}
 
+return render
 }
 
 
@@ -44,16 +49,14 @@ useEffect(() => {
     }
 },[logedUser])
 
-  return (
-    <C.Container>
-      {isAdmin ?  <UploadImage /> : <><C.Title>Bem vindo {nameTrated}</C.Title><Button Text="Sair" onClick={() => [signout(), navigate("/")]}>
-        Sair
-      </Button></>}
-    {allClothings.map((clothing) => <Shirt shirtName={clothing} />)}
-      <Button Text="Explore" onClick={() =>   navigate("/Explore")}></Button>
-   
-  </C.Container>
-  );
+  return (<div className="flex flex-col justify">{renderHome(isAdmin)}</div>)
+  // {isAdmin ?  <UploadImage /> : <><C.Title>
+  //       Bem vindo {nameTrated}
+  //       </C.Title>
+  //       <Explore allClothings={allClothings}/>
+  //       <Button Text="Sair" onClick={() => [signout(), navigate("/")]}>
+  //       Sair
+  //     </Button></>}
 }
 
 
