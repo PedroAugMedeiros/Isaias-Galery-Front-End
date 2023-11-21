@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     if (hasUser?.length) {
       return "Já tem uma conta com esse E-mail";
     } else {
-      Axios.post("https://isaias-galery-back-end.onrender.com/register", {
+      Axios.post("/register", {
         name: name,
         email: email, 
         password: password, 
